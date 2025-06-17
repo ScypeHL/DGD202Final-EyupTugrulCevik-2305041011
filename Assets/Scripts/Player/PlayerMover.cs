@@ -8,10 +8,17 @@ public class PlayerMover : MonoBehaviour
     [Header("Movement Parameters")]
     [field: SerializeField] public float MoveSpeed { get; private set; }
     [SerializeField] private float _turnSpeed;
-    
+    [SerializeField] Vector2 inputValue;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+
+    public void FixedUpdate()
+    {
+        inputValue = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Move(inputValue);
     }
 
     public void Move(Vector2 direction)
